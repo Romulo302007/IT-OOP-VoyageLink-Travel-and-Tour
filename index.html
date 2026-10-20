@@ -1,0 +1,2220 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VoyageLink Travel and Tours</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<!-- ==================================================
+     LOGIN PAGE
+================================================== -->
+
+<div id="loginPage" class="auth-container">
+
+    <div class="auth-card">
+
+        <img src="logo.jpg" alt="VoyageLink Logo">
+
+        <h2>VoyageLink</h2>
+
+        <p>Travel and Tour Management System</p>
+
+        <div class="input-group">
+
+            <label>Email Address</label>
+
+            <input
+                type="text"
+                id="loginEmail"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+            >
+
+        </div>
+
+        <button class="btn" onclick="login()">
+            Login
+        </button>
+
+        <div class="auth-link">
+
+            Don't have an account?
+
+            <span onclick="showSignup()">
+                Sign Up
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     SIGN UP PAGE
+================================================== -->
+
+<div id="signupPage" class="auth-container hidden">
+
+    <div class="auth-card">
+
+        <img src="logo.jpg" alt="VoyageLink Logo">
+
+        <h2>Create Account</h2>
+
+        <p>Sign up to start planning your journey.</p>
+
+        <div class="input-group">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="signupName"
+                placeholder="Enter your name"
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="signupEmail"
+                placeholder="Enter email"
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create password"
+            >
+
+        </div>
+
+        <button class="btn" onclick="signup()">
+            Create Account
+        </button>
+
+        <div class="auth-link">
+
+            Already have an account?
+
+            <span onclick="showLogin()">
+                Login
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     MAIN WEBSITE
+================================================== -->
+
+<div id="mainWebsite" class="hidden">
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <img src="logo.jpg" alt="VoyageLink Logo">
+
+    <nav>
+
+        <a onclick="showPage('homePage')">
+            Home
+        </a>
+
+        <a onclick="showPage('destinationsPage')">
+            Destinations
+        </a>
+
+        <a onclick="showPage('packagesPage')">
+            Packages
+        </a>
+
+        <a onclick="showPage('bookingsPage')">
+            Bookings
+        </a>
+
+        <a onclick="logout()">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ==================================================
+     HOME PAGE
+================================================== -->
+
+<section id="homePage" class="container">
+
+    <div class="welcome-box">
+
+        <div class="welcome-text">
+
+            <h1>
+                Welcome to VoyageLink!
+            </h1>
+
+            <p>
+                Explore destinations and tour packages with our simple
+                Travel and Tour Management System. Plan your trip and
+                choose the package that fits your travel needs.
+            </p>
+
+        </div>
+
+        <div class="plane">
+            ✈️
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📍
+            </div>
+
+            <div
+                class="stat-number"
+                id="destinationCount"
+            >
+                5
+            </div>
+
+            <div class="stat-label">
+                Destinations
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🧳
+            </div>
+
+            <div
+                class="stat-number"
+                id="packageCount"
+            >
+                5
+            </div>
+
+            <div class="stat-label">
+                Tour Packages
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎟️
+            </div>
+
+            <div
+                class="stat-number"
+                id="slotCount"
+            >
+                55
+            </div>
+
+            <div class="stat-label">
+                Available Slots
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <div
+                class="stat-number"
+                id="bookingCount"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Bookings
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Popular Tour Packages
+    </h2>
+
+
+    <div
+        id="popularPackages"
+        class="card-grid"
+    ></div>
+
+</section>
+
+
+<!-- ==================================================
+     DESTINATIONS PAGE
+================================================== -->
+
+<section
+    id="destinationsPage"
+    class="container hidden"
+>
+
+    <h2 class="section-title">
+        Destinations
+    </h2>
+
+    <p
+        style="
+        color:#607b94;
+        margin-bottom:20px;
+        "
+    >
+        Discover some of the popular destinations offered by VoyageLink.
+    </p>
+
+    <div class="toolbar-controls">
+        <input type="search" id="destinationSearch" placeholder="Search destination or description..." oninput="displayDestinations()">
+        <select id="destinationFilter" onchange="displayDestinations()">
+            <option value="">All Destinations</option>
+            <option value="El Nido, Palawan">El Nido, Palawan</option>
+            <option value="Boracay Island">Boracay Island</option>
+            <option value="Baguio">Baguio</option>
+            <option value="Vigan">Vigan</option>
+            <option value="Tagaytay">Tagaytay</option>
+        </select>
+    </div>
+
+    <div
+        id="destinationCards"
+        class="card-grid"
+    ></div>
+
+</section>
+
+
+<!-- ==================================================
+     DESTINATION DETAILS PAGE
+================================================== -->
+
+<section
+    id="destinationDetailPage"
+    class="container hidden"
+>
+
+    <div
+        class="back-btn"
+        onclick="showPage('destinationsPage')"
+    >
+        ← Back to Destinations
+    </div>
+
+
+    <div class="destination-detail-card">
+
+        <div class="destination-detail-content">
+
+            <h2 id="destinationDetailName"></h2>
+
+            <p id="destinationDetailDuration"></p>
+
+            <p id="destinationDetailPrice"></p>
+
+            <p id="destinationDetailSlots"></p>
+
+            <h3 style="color:#182c68; font-size:19px; margin:20px 0 8px;">
+                Inclusions
+            </h3>
+
+            <ul id="destinationDetailInclusions" style="padding-left:18px; color:#263b70; font-size:14px; line-height:1.4; margin-bottom:25px;"></ul>
+
+            <h3 style="color:#182c68; font-size:19px; margin-bottom:8px;">
+                Description
+            </h3>
+
+            <p id="destinationDetailDescription"></p>
+</div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PACKAGES PAGE
+================================================== -->
+
+<section
+    id="packagesPage"
+    class="container hidden"
+>
+
+    <h2 class="section-title">
+        Tour Packages
+    </h2>
+
+    <p
+        style="
+        color:#607b94;
+        margin-bottom:20px;
+        "
+    >
+        Choose a package that fits your preferred destination and budget.
+    </p>
+
+    <div class="toolbar-controls">
+        <input type="search" id="packageSearch" placeholder="Search package, destination, or description..." oninput="displayPackages()">
+        <select id="packageFilter" onchange="displayPackages()">
+            <option value="">All Destinations</option>
+            <option value="El Nido, Palawan">El Nido, Palawan</option>
+            <option value="Boracay Island">Boracay Island</option>
+            <option value="Baguio">Baguio</option>
+            <option value="Vigan">Vigan</option>
+            <option value="Tagaytay">Tagaytay</option>
+        </select>
+        <select id="packageSort" onchange="displayPackages()">
+            <option value="default">Sort Packages</option>
+            <option value="price-low">Price: Lowest to Highest</option>
+            <option value="price-high">Price: Highest to Lowest</option>
+            <option value="name-az">Name: A–Z</option>
+            <option value="name-za">Name: Z–A</option>
+        </select>
+    </div>
+
+    <div
+        id="packageCards"
+        class="card-grid"
+    ></div>
+
+</section>
+
+
+<!-- ==================================================
+     BOOKING PAGE
+================================================== -->
+
+<section
+    id="bookingPage"
+    class="container hidden"
+>
+
+    <div
+        class="back-btn"
+        onclick="showPage('packagesPage')"
+    >
+        ← Back to Packages
+    </div>
+
+
+    <div class="booking-card">
+
+
+        <div class="booking-layout">
+
+
+            <div>
+
+                <img
+                    id="bookingImage"
+                    class="booking-image"
+                    src=""
+                    alt="Tour Package"
+                >
+
+            </div>
+
+
+            <div class="booking-details">
+
+                <h2
+                    id="bookingPackageName"
+                >
+                    Package
+                </h2>
+
+
+                <p>
+
+                    <strong>
+                        Destination:
+                    </strong>
+
+                    <span
+                        id="bookingDestination"
+                    ></span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Duration:
+                    </strong>
+
+                    <span
+                        id="bookingDuration"
+                    ></span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Price per person:
+                    </strong>
+
+                    ₱<span
+                        id="bookingPrice"
+                    ></span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Available slots:
+                    </strong>
+
+                    <span
+                        id="bookingSlots"
+                    ></span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <hr
+            style="
+            margin:25px 0;
+            border:none;
+            border-top:1px solid #edf1f4;
+            "
+        >
+
+
+        <div class="input-group">
+
+            <label>
+                Tourist Name
+            </label>
+
+            <input
+                type="text"
+                id="touristName"
+                placeholder="Enter tourist name"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Contact Number
+            </label>
+
+            <input
+                type="text"
+                id="touristContact"
+                placeholder="Enter contact number"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Travel Date
+            </label>
+
+            <input
+                type="date"
+                id="travelDate"
+                required
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Number of Tourists
+            </label>
+
+            <select
+                id="touristCount"
+                onchange="calculateTotal()"
+            >
+
+                <option value="1">
+                    1 Tourist
+                </option>
+
+                <option value="2">
+                    2 Tourists
+                </option>
+
+                <option value="3">
+                    3 Tourists
+                </option>
+
+                <option value="4">
+                    4 Tourists
+                </option>
+
+                <option value="5">
+                    5 Tourists
+                </option>
+
+                <option value="6">
+                    6 Tourists
+                </option>
+
+                <option value="7">
+                    7 Tourists
+                </option>
+
+                <option value="8">
+                    8 Tourists
+                </option>
+
+                <option value="9">
+                    9 Tourists
+                </option>
+
+                <option value="10">
+                    10 Tourists
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="total-box">
+
+            <p>
+                Total Cost
+            </p>
+
+            <div class="total-price">
+
+                ₱<span id="totalCost">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="confirmBooking()"
+        >
+            Confirm Booking
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     BOOKING SUMMARY
+================================================== -->
+
+<section
+    id="summaryPage"
+    class="container hidden"
+>
+
+    <div class="summary-card">
+
+        <h2>
+            Booking Confirmed!
+        </h2>
+
+
+        <div class="summary-row">
+
+            <span>
+                Booking ID
+            </span>
+
+            <strong
+                id="summaryID"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Tourist Name
+            </span>
+
+            <strong
+                id="summaryName"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Contact
+            </span>
+
+            <strong
+                id="summaryContact"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Package
+            </span>
+
+            <strong
+                id="summaryPackage"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Destination
+            </span>
+
+            <strong
+                id="summaryDestination"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Travel Date
+            </span>
+
+            <strong
+                id="summaryTravelDate"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Number of Tourists
+            </span>
+
+            <strong
+                id="summaryTourists"
+            ></strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Price per Person
+            </span>
+
+            <strong>
+                ₱<span
+                    id="summaryPrice"
+                ></span>
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Total Cost
+            </span>
+
+            <strong style="color:#087be5;">
+
+                ₱<span
+                    id="summaryTotal"
+                ></span>
+
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Status
+            </span>
+
+            <span class="status">
+                Confirmed
+            </span>
+
+        </div>
+
+
+        <br>
+
+
+        <button
+            class="btn"
+            onclick="showPage('homePage')"
+        >
+            Back to Home
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     BOOKINGS PAGE
+================================================== -->
+
+<section
+    id="bookingsPage"
+    class="container hidden"
+>
+
+    <h2 class="section-title">
+        My Bookings
+    </h2>
+
+    <p
+        style="
+        color:#607b94;
+        margin-bottom:20px;
+        "
+    >
+        View your confirmed tour bookings.
+    </p>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Booking ID
+                    </th>
+
+                    <th>
+                        Tourist
+                    </th>
+
+                    <th>
+                        Contact Number
+                    </th>
+
+                    <th>
+                        Package
+                    </th>
+
+                    <th>
+                        Destination
+                    </th>
+
+                    <th>
+                        Tourists
+                    </th>
+
+                    <th>
+                        Travel Date
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="bookingTableBody"
+            ></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    VoyageLink Travel and Tours © 2026
+
+</footer>
+
+
+</div>
+
+
+<script>
+/* ==================================================
+   JAVASCRIPT
+   Controls login, page navigation, destinations, packages, bookings,
+   calculations, CRUD actions, and saving/loading browser data.
+================================================== */
+
+/* ==================================================
+   DATA
+================================================== */
+
+/* DATA OBJECT (JavaScript object; its arrays hold destinations, packages, and bookings) */
+const travelData = {
+
+    destinations: [
+
+        {
+            id: 1,
+            name: "El Nido, Palawan",
+            image: "elnido.jpg",
+            description:
+            "Crystal clear waters and beautiful island adventures."
+        },
+
+        {
+            id: 2,
+            name: "Boracay Island",
+            image: "boracay.jpg",
+            description:
+            "White sand beaches and relaxing island activities."
+        },
+
+        {
+            id: 3,
+            name: "Baguio",
+            image: "baguio.jpg",
+            description:
+            "Cool weather, pine trees, and peaceful mountain views."
+        },
+
+        {
+            id: 4,
+            name: "Vigan",
+            image: "vigan.jpg",
+            description:
+            "Historic streets, cultural sights, and classic heritage houses."
+        },
+
+        {
+            id: 5,
+            name: "Tagaytay",
+            image: "tagaytay.jpg",
+            description:
+            "Relaxing scenery, cool weather, and beautiful nature views."
+        }
+
+    ],
+
+
+    packages: [
+
+        {
+            id: 1,
+            name: "El Nido Island Escape",
+            destination: "El Nido, Palawan",
+            duration: "3 Days / 2 Nights",
+            price: 8500,
+            slots: 9,
+            image: "elnido.jpg"
+        },
+
+        {
+            id: 2,
+            name: "Boracay Beach Getaway",
+            destination: "Boracay Island",
+            duration: "3 Days / 2 Nights",
+            price: 7500,
+            slots: 10,
+            image: "boracay.jpg"
+        },
+
+        {
+            id: 3,
+            name: "Baguio Mountain Escape",
+            destination: "Baguio",
+            duration: "2 Days / 1 Night",
+            price: 5500,
+            slots: 10,
+            image: "baguio.jpg"
+        },
+
+        {
+            id: 4,
+            name: "Vigan Heritage Tour",
+            destination: "Vigan",
+            duration: "2 Days / 1 Night",
+            price: 5000,
+            slots: 6,
+            image: "vigan.jpg"
+        },
+
+        {
+            id: 5,
+            name: "Tagaytay Leisure Trip",
+            destination: "Tagaytay",
+            duration: "2 Days / 1 Night",
+            price: 4500,
+            slots: 10,
+            image: "tagaytay.jpg"
+        }
+
+    ],
+
+    bookings: []
+
+};
+
+/* ==================================================
+   SAVE / LOAD DATA WITH LOCAL STORAGE
+================================================== */
+const VOYAGELINK_STORAGE_KEY = "voyageLinkTravelData_v1";
+
+/* LOCAL STORAGE + JSON: convert data to JSON text and save it in this browser. */
+function saveTravelData() {
+    try {
+        const dataToSave = {
+            bookings: travelData.bookings,
+            packageSlots: travelData.packages.map(function(pkg) {
+                return { id: pkg.id, slots: pkg.slots };
+            })
+        };
+        localStorage.setItem(VOYAGELINK_STORAGE_KEY, JSON.stringify(dataToSave));
+    } catch (error) {
+        console.warn("VoyageLink data could not be saved in this browser.", error);
+    }
+}
+
+/* LOCAL STORAGE + JSON: read saved JSON text and parse it back into JavaScript data. */
+function loadTravelData() {
+    try {
+        const savedText = localStorage.getItem(VOYAGELINK_STORAGE_KEY);
+        if (!savedText) return;
+
+        const savedData = JSON.parse(savedText);
+        if (savedData && Array.isArray(savedData.bookings)) {
+            travelData.bookings = savedData.bookings;
+        }
+        if (savedData && Array.isArray(savedData.packageSlots)) {
+            savedData.packageSlots.forEach(function(savedPackage) {
+                const pkg = travelData.packages.find(function(item) {
+                    return item.id === savedPackage.id;
+                });
+                if (pkg && Number.isFinite(savedPackage.slots)) {
+                    pkg.slots = savedPackage.slots;
+                }
+            });
+        }
+    } catch (error) {
+        console.warn("Saved VoyageLink data could not be loaded.", error);
+    }
+}
+
+loadTravelData();
+
+/* ==================================================
+   SELECTED PACKAGE
+================================================== */
+
+let selectedPackage = null;
+
+
+/* HTML section: Login form is defined above; this JavaScript handles its behavior. */
+/* ==================================================
+   LOGIN
+================================================== */
+
+function login() {
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value
+        .trim();
+
+
+    if (email === "" || password === "") {
+
+        alert(
+            "Please enter your email and password."
+        );
+
+        return;
+    }
+
+
+    /* SESSION: remember that the demo user has logged in. */
+    try {
+        localStorage.setItem("voyagelinkLoggedIn", "true");
+    } catch (error) {
+        console.warn("Login session could not be saved in this browser.", error);
+    }
+
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("signupPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("mainWebsite")
+        .classList.remove("hidden");
+
+    showPage("homePage");
+
+}
+
+
+/* ==================================================
+   SIGN UP
+================================================== */
+
+function showSignup() {
+
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("signupPage")
+        .classList.remove("hidden");
+
+}
+
+
+function showLogin() {
+
+    document
+        .getElementById("signupPage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+}
+
+
+function signup() {
+
+    const name =
+        document
+        .getElementById("signupName")
+        .value
+        .trim();
+
+    const email =
+        document
+        .getElementById("signupEmail")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("signupPassword")
+        .value
+        .trim();
+
+
+    if (
+        name === "" ||
+        email === "" ||
+        password === ""
+    ) {
+
+        alert(
+            "Please complete all fields."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "Account created successfully! You can now login."
+    );
+
+
+    document.getElementById("signupName").value = "";
+    document.getElementById("signupEmail").value = "";
+    document.getElementById("signupPassword").value = "";
+
+
+    showLogin();
+
+}
+
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+function logout() {
+
+    /* SESSION: remove the saved login state when the user logs out. */
+    try {
+        localStorage.removeItem("voyagelinkLoggedIn");
+    } catch (error) {
+        console.warn("Login session could not be cleared.", error);
+    }
+
+    document
+        .getElementById("mainWebsite")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("signupPage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+
+    document.getElementById("loginEmail").value = "";
+    document.getElementById("loginPassword").value = "";
+
+}
+
+
+/* ==================================================
+   PAGE NAVIGATION
+================================================== */
+
+function showPage(pageID) {
+
+    const pages = [
+
+        "homePage",
+        "destinationsPage",
+        "destinationDetailPage",
+        "packagesPage",
+        "bookingPage",
+        "summaryPage",
+        "bookingsPage"
+
+    ];
+
+
+    pages.forEach(function(page) {
+
+        document
+            .getElementById(page)
+            .classList.add("hidden");
+
+    });
+
+
+    document
+        .getElementById(pageID)
+        .classList.remove("hidden");
+
+
+    if (pageID === "homePage") {
+
+        updateDashboard();
+
+    }
+
+
+    if (pageID === "destinationsPage") {
+
+        displayDestinations();
+
+    }
+
+
+    if (pageID === "packagesPage") {
+
+        displayPackages();
+
+    }
+
+
+    if (pageID === "bookingsPage") {
+
+        displayBookings();
+
+    }
+
+}
+
+
+/* ==================================================
+   DISPLAY DESTINATIONS
+================================================== */
+
+function displayDestinations() {
+    const container = document.getElementById("destinationCards");
+    const search = (document.getElementById("destinationSearch")?.value || "").trim().toLowerCase();
+    const filter = document.getElementById("destinationFilter")?.value || "";
+    const results = travelData.destinations.filter(function(destination) {
+        return (destination.name + " " + destination.description).toLowerCase().includes(search)
+            && (!filter || destination.name === filter);
+    });
+    container.innerHTML = "";
+    if (!results.length) {
+        container.innerHTML = '<p style="grid-column:1/-1;color:#607b94;">No destinations found. Try another search or filter.</p>';
+        return;
+    }
+    results.forEach(function(destination) {
+        container.innerHTML += `
+            <div class="card">
+                <img src="${destination.image}" class="card-image" alt="${destination.name}">
+                <div class="card-content">
+                    <h3>${destination.name}</h3>
+                    <p class="destination-description">${destination.description}</p>
+                    <button class="small-btn" onclick="viewDestination(${destination.id})">View Details</button>
+                </div>
+            </div>`;
+    });
+}
+
+
+/* ==================================================
+   VIEW DESTINATION DETAILS
+================================================== */
+
+function viewDestination(id) {
+
+    const destination =
+        travelData.destinations.find(
+            function(item) {
+
+                return item.id === id;
+
+            }
+        );
+
+
+    if (!destination) {
+        return;
+    }
+
+
+    const packageForDestination =
+        travelData.packages.find(
+            function(pkg) {
+
+                return (
+                    pkg.destination ===
+                    destination.name
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "destinationDetailName"
+        )
+        .textContent =
+        packageForDestination
+            ? packageForDestination.name
+            : destination.name;
+
+
+    document
+        .getElementById(
+            "destinationDetailDuration"
+        )
+        .textContent =
+        packageForDestination
+            ? packageForDestination.duration
+            : "";
+
+
+    document
+        .getElementById(
+            "destinationDetailPrice"
+        )
+        .textContent =
+        packageForDestination
+            ? "₱" + packageForDestination.price.toLocaleString() + " / person"
+            : "";
+
+
+    document
+        .getElementById(
+            "destinationDetailSlots"
+        )
+        .textContent =
+        packageForDestination
+            ? packageForDestination.slots + " Slots Left"
+            : "";
+
+
+    const inclusions = [
+        "Hotel accommodation",
+        "Daily breakfast",
+        "Tour guide",
+        "Transportation"
+    ];
+
+
+    if (destination.name === "El Nido, Palawan" || destination.name === "Boracay Island") {
+        inclusions.splice(2, 0, "Island hopping tour");
+    } else if (destination.name === "Vigan") {
+        inclusions.splice(2, 0, "Heritage tour");
+    } else {
+        inclusions.splice(2, 0, "Sightseeing tour");
+    }
+
+
+    document
+        .getElementById(
+            "destinationDetailInclusions"
+        )
+        .innerHTML = inclusions
+        .map(function(item) {
+            return "<li>" + item + "</li>";
+        })
+        .join("");
+
+
+    const descriptions = {
+        "El Nido, Palawan": "Experience crystal-clear waters, beautiful islands, and relaxing tropical scenery in El Nido, Palawan. This package is perfect for travelers who want to enjoy island adventures and peaceful beach activities.",
+        "Boracay Island": "Experience the crystal-clear waters and white sand beaches of Boracay. This package includes comfortable accommodation, daily breakfast, island hopping, and guided activities for a relaxing tropical getaway.",
+        "Baguio": "Enjoy the cool weather, pine trees, and relaxing mountain scenery of Baguio. This package lets travelers explore popular attractions while enjoying a peaceful escape from the city.",
+        "Vigan": "Discover the historic streets and cultural attractions of Vigan. Travelers can experience its heritage houses, classic architecture, and rich local history through a guided heritage tour.",
+        "Tagaytay": "Enjoy the relaxing scenery and cool weather of Tagaytay. This package offers a peaceful leisure trip with beautiful nature views, sightseeing activities, and comfortable accommodation."
+    };
+
+
+    document
+        .getElementById(
+            "destinationDetailDescription"
+        )
+        .textContent =
+        descriptions[destination.name] || destination.description;
+showPage(
+        "destinationDetailPage"
+    );
+
+}
+
+
+/* ==================================================
+   DISPLAY PACKAGES
+================================================== */
+
+function displayPackages() {
+    const container = document.getElementById("packageCards");
+    const search = (document.getElementById("packageSearch")?.value || "").trim().toLowerCase();
+    const filter = document.getElementById("packageFilter")?.value || "";
+    const sort = document.getElementById("packageSort")?.value || "default";
+    let results = travelData.packages.filter(function(pkg) {
+        const description = getDestinationDescription(pkg.destination);
+        const searchable = (pkg.name + " " + pkg.destination + " " + pkg.duration + " " + description).toLowerCase();
+        return searchable.includes(search) && (!filter || pkg.destination === filter);
+    });
+    if (sort === "price-low") results.sort((a,b) => a.price-b.price);
+    else if (sort === "price-high") results.sort((a,b) => b.price-a.price);
+    else if (sort === "name-az") results.sort((a,b) => a.name.localeCompare(b.name));
+    else if (sort === "name-za") results.sort((a,b) => b.name.localeCompare(a.name));
+    container.innerHTML = "";
+    if (!results.length) {
+        container.innerHTML = '<p style="grid-column:1/-1;color:#607b94;">No packages found. Try another search or filter.</p>';
+        return;
+    }
+    results.forEach(function(pkg) {
+        container.innerHTML += `
+            <div class="card">
+                <img src="${pkg.image}" class="card-image" alt="${pkg.name}">
+                <div class="card-content">
+                    <h3>${pkg.name}</h3>
+                    <p>Explore ${pkg.destination} with a ${pkg.duration.toLowerCase()} travel experience. ${getDestinationDescription(pkg.destination)}</p>
+                    <div class="package-info"><span>📅 ${pkg.duration}</span><span>🎟️ ${pkg.slots} slots</span></div>
+                    <div class="price">₱${pkg.price.toLocaleString()}</div>
+                    <button class="small-btn" onclick="openBooking(${pkg.id})">Book Now</button>
+                </div>
+            </div>`;
+    });
+}
+
+
+/* ==================================================
+   POPULAR PACKAGES
+================================================== */
+
+function displayPopularPackages() {
+
+    const container =
+        document.getElementById(
+            "popularPackages"
+        );
+
+
+    container.innerHTML = "";
+
+
+    travelData.packages
+        .slice(0, 3)
+        .forEach(
+            function(pkg) {
+
+                container.innerHTML += `
+
+                    <div class="card">
+
+                        <img
+                            src="${pkg.image}"
+                            class="card-image"
+                            alt="${pkg.name}"
+                        >
+
+                        <div class="card-content">
+
+                            <h3>
+                                ${pkg.destination}
+                            </h3>
+
+                            <p>
+                                ${getDestinationDescription(
+                                    pkg.destination
+                                )}
+                            </p>
+
+                            <div class="price">
+
+                                ₱${pkg.price.toLocaleString()}
+
+                            </div>
+
+                            <button
+                                class="small-btn"
+                                onclick="openBooking(${pkg.id})"
+                            >
+                                View Package
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+}
+
+
+/* ==================================================
+   DESTINATION DESCRIPTION
+================================================== */
+
+function getDestinationDescription(
+    destinationName
+) {
+
+    const destination =
+        travelData.destinations.find(
+            function(item) {
+
+                return (
+                    item.name ===
+                    destinationName
+                );
+
+            }
+        );
+
+
+    if (destination) {
+
+        return destination.description;
+
+    }
+
+
+    return "Enjoy a memorable travel experience with VoyageLink.";
+
+}
+
+
+/* ==================================================
+   DATE HELPERS
+================================================== */
+
+function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+function formatTravelDate(dateValue) {
+    if (!dateValue) return "";
+    const date = new Date(dateValue + "T00:00:00");
+    return date.toLocaleDateString("en-PH", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+}
+
+
+/* ==================================================
+   OPEN BOOKING
+================================================== */
+
+function openBooking(packageID) {
+
+    selectedPackage =
+        travelData.packages.find(
+            function(pkg) {
+
+                return pkg.id === packageID;
+
+            }
+        );
+
+
+    if (!selectedPackage) {
+        return;
+    }
+
+
+    document
+        .getElementById("bookingImage")
+        .src =
+        selectedPackage.image;
+
+
+    document
+        .getElementById("bookingPackageName")
+        .textContent =
+        selectedPackage.name;
+
+
+    document
+        .getElementById("bookingDestination")
+        .textContent =
+        selectedPackage.destination;
+
+
+    document
+        .getElementById("bookingDuration")
+        .textContent =
+        selectedPackage.duration;
+
+
+    document
+        .getElementById("bookingPrice")
+        .textContent =
+        selectedPackage.price
+        .toLocaleString();
+
+
+    document
+        .getElementById("bookingSlots")
+        .textContent =
+        selectedPackage.slots;
+
+
+    document
+        .getElementById("touristName")
+        .value = "";
+
+
+    document
+        .getElementById("touristContact")
+        .value = "";
+
+    const travelDateInput = document.getElementById("travelDate");
+    travelDateInput.min = getTodayDate();
+    travelDateInput.value = "";
+
+
+    document
+        .getElementById("touristCount")
+        .value = "1";
+
+
+    calculateTotal();
+
+
+    showPage(
+        "bookingPage"
+    );
+
+}
+
+
+/* ==================================================
+   CALCULATE TOTAL
+================================================== */
+
+function calculateTotal() {
+
+    if (!selectedPackage) {
+        return;
+    }
+
+
+    const tourists =
+        parseInt(
+            document
+            .getElementById("touristCount")
+            .value
+        );
+
+
+    const total =
+        selectedPackage.price *
+        tourists;
+
+
+    document
+        .getElementById("totalCost")
+        .textContent =
+        total.toLocaleString();
+
+}
+
+
+/* ==================================================
+   CONFIRM BOOKING
+================================================== */
+
+function confirmBooking() {
+
+    if (!selectedPackage) {
+        return;
+    }
+
+
+    const name =
+        document
+        .getElementById("touristName")
+        .value
+        .trim();
+
+
+    const contact =
+        document
+        .getElementById("touristContact")
+        .value
+        .trim();
+
+    const travelDate = document.getElementById("travelDate").value;
+
+
+    const tourists =
+        parseInt(
+            document
+            .getElementById("touristCount")
+            .value
+        );
+
+
+    if (
+        name === "" ||
+        contact === ""
+    ) {
+
+        alert(
+            "Please complete the tourist information."
+        );
+
+        return;
+    }
+
+    if (travelDate === "") {
+        alert("Please select your travel date.");
+        return;
+    }
+
+    if (travelDate < getTodayDate()) {
+        alert("Please choose today or a future date.");
+        return;
+    }
+
+
+    if (
+        tourists >
+        selectedPackage.slots
+    ) {
+
+        alert(
+            "Not enough available slots for this package."
+        );
+
+        return;
+    }
+
+
+    const total =
+        selectedPackage.price *
+        tourists;
+
+
+    selectedPackage.slots -= tourists;
+
+
+    const bookingNumber =
+        travelData.bookings.length + 1;
+
+
+    const bookingID =
+        "VL" +
+        String(bookingNumber)
+        .padStart(3, "0");
+
+
+    const booking = {
+
+        id: bookingID,
+
+        name: name,
+
+        contact: contact,
+
+        packageName:
+            selectedPackage.name,
+
+        destination:
+            selectedPackage.destination,
+
+        travelDate: travelDate,
+
+        tourists: tourists,
+
+        price:
+            selectedPackage.price,
+
+        total: total,
+
+        status: "Confirmed"
+
+    };
+
+
+    travelData.bookings.push(
+        booking
+    );
+    saveTravelData();
+
+    /* SUMMARY */
+
+    document.getElementById("summaryID").textContent =
+    booking.id;
+
+
+    document.getElementById("summaryName").textContent =
+    booking.name;
+
+
+    document.getElementById("summaryContact").textContent =
+    booking.contact;
+
+
+    document.getElementById("summaryPackage").textContent =
+    booking.packageName;
+
+
+    document.getElementById("summaryDestination").textContent =
+    booking.destination;
+
+    document.getElementById("summaryTravelDate").textContent = 
+    formatTravelDate(booking.travelDate);
+
+
+    document.getElementById("summaryTourists").textContent =
+    booking.tourists;
+
+
+    document.getElementById("summaryPrice").textContent =
+    booking.price.toLocaleString();
+
+
+    document.getElementById("summaryTotal").textContent =
+    booking.total.toLocaleString();
+
+
+    updateDashboard();
+
+
+    showPage(
+        "summaryPage"
+    );
+
+}
+
+
+/* ==================================================
+   DISPLAY BOOKINGS
+================================================== */
+
+function displayBookings() {
+    const tableBody = document.getElementById("bookingTableBody");
+    tableBody.innerHTML = "";
+
+    if (travelData.bookings.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="10" style="text-align:center; padding:30px;">
+                    No bookings yet.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    travelData.bookings.forEach(function(booking) {
+        tableBody.innerHTML += `
+            <tr>
+                <td><strong>${booking.id}</strong></td>
+                <td>${booking.name}</td>
+                <td>${booking.contact || "—"}</td>
+                <td>${booking.packageName}</td>
+                <td>${booking.destination}</td>
+                <td>${booking.tourists}</td>
+                <td>${formatTravelDate(booking.travelDate)}</td>
+                <td>₱${booking.total.toLocaleString()}</td>
+                <td><span class="status">${booking.status}</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="edit-btn" onclick="editBooking('${booking.id}')">Edit</button>
+                        <button class="delete-btn" onclick="deleteBooking('${booking.id}')">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+/* ==================================================
+   UPDATE BOOKING (CRUD: UPDATE)
+================================================== */
+
+function editBooking(bookingID) {
+    const booking = travelData.bookings.find(function(item) {
+        return item.id === bookingID;
+    });
+
+    if (!booking) {
+        alert("Booking not found.");
+        return;
+    }
+
+    const name = prompt("Edit tourist name:", booking.name);
+    if (name === null) return;
+
+    const contact = prompt("Edit contact number:", booking.contact);
+    if (contact === null) return;
+
+    // Show a friendly date such as "December 10, 2026" in the prompt.
+    const currentDateParts = booking.travelDate.split("-");
+    const currentDateDisplay = currentDateParts.length === 3
+        ? new Date(
+            Number(currentDateParts[0]),
+            Number(currentDateParts[1]) - 1,
+            Number(currentDateParts[2])
+          ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+          })
+        : booking.travelDate;
+
+    const travelDateInput = prompt(
+        "Edit travel date:",
+        currentDateDisplay
+    );
+    if (travelDateInput === null) return;
+
+    // Accept friendly dates and convert them back to YYYY-MM-DD for storage.
+    const parsedInputDate = new Date(travelDateInput.trim());
+    let travelDate = "";
+    if (travelDateInput.trim() && !Number.isNaN(parsedInputDate.getTime())) {
+        travelDate = [
+            parsedInputDate.getFullYear(),
+            String(parsedInputDate.getMonth() + 1).padStart(2, "0"),
+            String(parsedInputDate.getDate()).padStart(2, "0")
+        ].join("-");
+    }
+    if (travelDate === null) return;
+
+    const touristsInput = prompt(
+        "Edit number of tourists (1-10):",
+        String(booking.tourists)
+    );
+    if (touristsInput === null) return;
+
+    const trimmedName = name.trim();
+    const trimmedContact = contact.trim();
+    const tourists = Number(touristsInput);
+
+    if (!trimmedName || !trimmedContact) {
+        alert("Tourist name and contact number cannot be empty.");
+        return;
+    }
+
+    if (!travelDate) {
+        alert("Please enter a valid travel date, such as December 10, 2026.");
+        return;
+    }
+
+    const dateParts = travelDate.split("-").map(Number);
+    const parsedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+    if (
+        parsedDate.getFullYear() !== dateParts[0] ||
+        parsedDate.getMonth() !== dateParts[1] - 1 ||
+        parsedDate.getDate() !== dateParts[2]
+    ) {
+        alert("Please enter a valid travel date, such as December 10, 2026.");
+        return;
+    }
+
+    if (travelDate < getTodayDate()) {
+        alert("Please choose today or a future date.");
+        return;
+    }
+
+    if (!Number.isInteger(tourists) || tourists < 1 || tourists > 10) {
+        alert("Number of tourists must be from 1 to 10.");
+        return;
+    }
+
+    const pkg = travelData.packages.find(function(item) {
+        return item.name === booking.packageName;
+    });
+
+    if (!pkg) {
+        alert("The package for this booking could not be found.");
+        return;
+    }
+
+    const availableForThisBooking = pkg.slots + booking.tourists;
+    if (tourists > availableForThisBooking) {
+        alert("Not enough available slots for the updated number of tourists.");
+        return;
+    }
+
+    // Return the previous slots and reserve the updated number.
+    pkg.slots = pkg.slots + booking.tourists - tourists;
+
+    booking.name = trimmedName;
+    booking.contact = trimmedContact;
+    booking.travelDate = travelDate;
+    booking.tourists = tourists;
+    booking.total = pkg.price * tourists;
+    booking.price = pkg.price;
+    saveTravelData();
+
+    alert("Booking updated successfully!");
+    displayBookings();
+    updateDashboard();
+}
+
+/* ==================================================
+   DELETE BOOKING (CRUD: DELETE)
+================================================== */
+
+function deleteBooking(bookingID) {
+    const bookingIndex = travelData.bookings.findIndex(function(item) {
+        return item.id === bookingID;
+    });
+
+    if (bookingIndex === -1) {
+        alert("Booking not found.");
+        return;
+    }
+
+    const booking = travelData.bookings[bookingIndex];
+    const confirmed = confirm(
+        "Are you sure you want to delete booking " + booking.id + "?"
+    );
+
+    if (!confirmed) return;
+
+    const pkg = travelData.packages.find(function(item) {
+        return item.name === booking.packageName;
+    });
+
+    if (pkg) {
+        pkg.slots += booking.tourists;
+    }
+
+    travelData.bookings.splice(bookingIndex, 1);
+    saveTravelData();
+
+    alert("Booking deleted successfully!");
+    displayBookings();
+    updateDashboard();
+}
+
+function updateDashboard() {
+
+    const totalSlots =
+        travelData.packages.reduce(
+            function(total, pkg) {
+                return (
+                    total +
+                    pkg.slots
+                );
+
+            },
+            0
+        );
+
+
+    document.getElementById("destinationCount").textContent =
+    travelData.destinations.length;
+
+
+    document.getElementById("packageCount").textContent =
+    travelData.packages.length;
+
+
+    document.getElementById("slotCount").textContent =
+    totalSlots;
+
+
+    document.getElementById("bookingCount").textContent =
+    travelData.bookings.length;
+
+
+    displayPopularPackages();
+
+}
+
+
+/* ==================================================
+   INITIAL LOAD
+================================================== */
+
+updateDashboard();
+
+/* SESSION RESTORE: stay on Home after refresh if the user did not log out. */
+try {
+    if (localStorage.getItem("voyagelinkLoggedIn") === "true") {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("signupPage").classList.add("hidden");
+        document.getElementById("mainWebsite").classList.remove("hidden");
+        showPage("homePage");
+    }
+} catch (error) {
+    console.warn("Saved login session could not be restored.", error);
+}
+
+</script>
+
+</body>
+</html>
